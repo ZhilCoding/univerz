@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Univerz</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="style.css">
+  <body>
+    <div class="popup-container">
+        <div class="popup-menu">
+            <a href="#">Chat History</a>
+            <a href="#">About Us</a>
+        </div>
+    </div>
+  </body>
+</head>
+<body>
+	<div class="chatbot-container">
+		<div class="chatbot-header">
+			<h1>Univerz Beta</h1>
+		</div>
+        <div class="chatbot-body">
+  <li class="chatbot-message bot-message">
+    <strong>Univerz :</strong> Maaf jika ada kesalahan karena aku tidak sesempurna yang kamu bayangkan 😁. Klik tombol refresh jika kamu ingin mengchat ulang!<button class="refresh-btn" onclick="location.reload()">Refresh</button>
+  </li>
+</div>
+		<div class="chatbot-body">
+			<!-- tempat pesan ditampilkan -->
+      <div class="typing-indicator">
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+</div>
+
+		</div> 
+		<div class="chatbot-footer">
+			<input type="text" placeholder="Ketik pesan di sini...">
+			<button>Kirim</button>
+		</div>
+	</div>
+  <!-- Script untuk mengaktifkan chatbot -->
+  <script>
+    const menuIcon = document.querySelector(".menu-icon");
+        const popupMenu = document.querySelector(".popup-menu");
+    const chatbot = document.querySelector('.chatbot');
+const messageContainer = document.querySelector('.chatbot-body');
+const input = document.querySelector('.chatbot-footer input[type="text"]');
+const sendBtn = document.querySelector('.chatbot-footer button');
+const apiKey = "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"; // Ganti dengan API key kamu
+
+    
+// Ambil elemen animasi bot
+const typingIndicator = document.querySelector('.typing-indicator');
+
+// Sembunyikan elemen animasi bot pada awalnya
+ typingIndicator.style.display = 'none';
+
+sendBtn.addEventListener('click', () => {
+  const message = input.value;
+  if (!message) return;
+  
+  function showTypingIndicator() {
+    typingIndicator.style.display = 'flex';
+  }
+  showTypingIndicator();
+
+  const userMessageContainer = document.createElement('div');
+  userMessageContainer.classList.add('chatbot-message');
+  userMessageContainer.classList.add('user-message');
+  userMessageContainer.textContent = message;
+  messageContainer.appendChild(userMessageContainer);
+
+  userMessageContainer.scrollIntoView({ behavior: 'smooth', block: 'end' });
+
+  fetch("https://api.openai.com/v1/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${apiKey}`,
+    },
+    body: JSON.stringify({
+      model: "text-davinci-003",
+      prompt: "Kamu adalah Univerz, sebuah bot cerdas yang memiliki IQ tak terbatas dan pengetahuan yang luas. Kamu bisa menjawab semua pertanyaan dari topik apapun, mulai dari sejarah, sains, teknologi, dan masih banyak lagi. Kamu bisa memberikan informasi detail dan bahkan memberikan solusi untuk masalah yang kompleks. Kamu juga sangat menghargai ilmu pengetahuan dan tidak suka jika ada informasi yang tidak benar atau hoax. Kamu selalu menggunakan logika dan data yang akurat dalam menjawab pertanyaan. Jangan ragu untuk bertanya kepada Univerz, karena Univerz selalu siap membantu kamu. Ketik 'Ok Univerz' jika kamu siap untuk mulai berbicara dengan Univerz. Jika kamu ingin bertanya tentang coding, pastikan untuk menuliskan bahasa pemrograman yang ingin kamu tanyakan dengan format [bahasa]. Contohnya: \`\`\`[python]. Jika kamu ingin meminta membuatkan / menolong / memperlihatkan kode, gunakan format sebagai berikut: \`\`\`[ Saya] : " + message + "\n\n[ Univerz] :",
+      temperature: 0.9,
+      max_tokens: 150,
+      top_p: 1,
+      frequency_penalty: 0,
+      presence_penalty: 0.6,
+      stop: [" [Kamu]:", " [Univerz]:"],
+    }),
+  })
+  .then((res) => res.json())
+  .then((data) => {
+    const output = data.choices[0].text.trim();
+
+    const botMessageContainer = document.createElement('div');
+    botMessageContainer.classList.add('chatbot-message');
+    botMessageContainer.innerHTML = `<img class="profile-picture" src="https://imgur.com/gallery/4MxygXY" alt="Profile picture"><p><strong>Univerz :</strong> ${output}</p>`;
+    messageContainer.appendChild(botMessageContainer);
+
+    botMessageContainer.scrollIntoView({ behavior: 'smooth', block: 'end' });
+
+    input.value = '';
+
+    function hideTypingIndicator() {
+      typingIndicator.style.display = 'none';
+    }
+
+    hideTypingIndicator();
+
+  })
+
+  .catch(error => console.error(error));
+});
+</script>
+</body>
+  </html>

@@ -1,0 +1,391 @@
+		/* bubble chat bot */
+.chatbot-message {
+  background-color: #af4ac3; /* warna latar belakang */
+  color: #fff; /* warna teks */
+  border-radius: 10px; /* membulatkan sudut bubble */
+  max-width: none; /* lebar maksimum */
+  margin: 10px; /* jarak antar bubble */
+  padding: 10px; /* jarak antara isi bubble dengan tepi bubble */
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.3); /* bayangan bubble */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* jenis font teks */
+}
+
+/* bubble chat pengguna */
+.user-message {
+  background-color: #a1887f; /* warna latar belakang */
+  color: #fff; /* warna teks */
+  border-radius: 10px; /* membulatkan sudut bubble */
+  max-width: 80%; /* lebar maksimum */
+  margin: 10px; /* jarak antar bubble */
+  padding: 10px; /* jarak antara isi bubble dengan tepi bubble */
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.3); /* bayangan bubble */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* jenis font teks */
+}
+
+/* styling untuk tampilan hutan */
+body {
+  background-color: #704ac3; /* warna latar belakang */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* jenis font teks */
+}
+
+.chatbot-container {
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+  background-color: #fff; /* warna latar belakang box chatbot */
+  border-radius: 10px; /* membulatkan sudut box chatbot */
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.3); /* bayangan box chatbot */
+}
+
+.chatbot-header {
+  background-color: #4caf50; /* warna latar belakang header */
+  color: #fff; /* warna teks header */
+  padding: 10px;
+  text-align: center;
+  border-top-left-radius: 10px; /* membulatkan sudut header kiri */
+  border-top-right-radius: 10px; /* membulatkan sudut header kanan */
+}
+
+.chatbot-footer {
+  background-color: #937fa1; /* warna latar belakang footer */
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  border-bottom-left-radius: 10px; /* membulatkan sudut footer kiri */
+  border-bottom-right-radius: 10px; /* membulatkan sudut footer kanan */
+}
+
+.chatbot-footer input[type="text"] {
+  width: 80%;
+  padding: 8px;
+  border-radius: 20px;
+  border: none;
+  margin-right: 10px;
+}
+
+.chatbot-footer button {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: none;
+  background-color: #6a3e8e; /* warna latar belakang tombol kirim */
+  color: #fff; /* warna teks tombol kirim */
+font-weight: bold;
+cursor: pointer;
+transition: background-color 0.3s ease-in-out;
+}
+
+.chatbot-footer button:hover {
+  background-color: #6a3e8e; /* warna latar belakang saat tombol kirim dihover */
+}
+
+.chatbot-footer input[type="text"] {
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 20px;
+  background-color: #f2f2f2; /* warna latar belakang input */
+  font-size: 16px;
+}
+
+.chatbot-message {
+  max-width: 100%;
+  margin: 10px;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 16px;
+  line-height: 1.4;
+  overflow-wrap: break-word;
+}
+
+.user-message {
+  margin-left: auto;
+  background-color: #5a307a; /* warna latar belakang bubble chat pengguna */
+  color: #fff;
+}
+
+.chatbot-message p {
+  margin: 0;
+}
+
+.chatbot-message img.profile-picture {
+  display: none;
+}
+
+.chatbot-message.bot-message {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  background-color: #efd9f2; /* warna latar belakang bubble chat bot */
+  color: #000;
+}
+
+.chatbot-message.bot-message p {
+  margin: 0;
+  margin-left: 50px;
+}
+
+.chatbot-header {
+  background-color: #732b8b; /* warna latar belakang header */
+  padding: 20px;
+  text-align: center;
+  color: #fff;
+  font-size: 32px;
+}
+
+.chatbot-container {
+  background-color: #cc73f5; /* warna latar belakang keseluruhan */
+  max-width: 800px;
+  margin: 0 auto;
+  border-radius: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  font-family: BlackTear, sans-serif;
+}
+
+@media only screen and (max-width: 600px) {
+  .chatbot-message {
+    max-width: 60%;
+  }
+
+  .chatbot-header {
+    font-size: 24px;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #aaa;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #999;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f5f5f5;
+  border-radius: 10px;
+}
+
+/* Tambahkan animasi scroll bar */
+::-webkit-scrollbar-thumb {
+  animation-name: scroll;
+  animation-duration: 1s;
+}
+
+/* Atur animasi scroll */
+@keyframes scroll {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Membuat animasi blink */
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Mengatur animasi pada pesan bot */
+.chatbot-body .chatbot-message.bot .chatbot-text::after {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 16px;
+  margin-left: 8px;
+  vertical-align: middle;
+  background-color: #ffffff; /* warna animasi */
+  animation: blink 1s infinite;
+}
+
+    /* styling untuk bubble ketika bot sedang mengetik */
+.typing {
+  display: inline-block;
+  vertical-align: middle;
+  width: 8px;
+  height: 8px;
+  background-color: #af4ac3;
+  border-radius: 50%;
+  animation: typing 1s infinite;
+  margin-right: 5px;
+}
+
+@keyframes typing {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+#typing-indicator {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+  font-size: 16px;
+  color: #af4ac3;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.refresh-btn {
+  background-color: #6a3e8e;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  margin-left: 10px;
+}
+
+.refresh-btn:hover {
+  background-color: #937fa1;
+}
+
+.abt-btn {
+  background-color: #efd9f2;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  margin-left: 10px;
+}
+
+.abt-btn:hover {
+  background-color: #efd9f2;
+}
+
+    /* Animasi untuk bot sedang mengetik */
+@keyframes bot-typing {
+  0% { width: 0; }
+  50% { width: 50%; }
+  100% { width: 100%; }
+}
+
+/* Gaya untuk bot sedang mengetik */
+.typing-indicator {
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  font-style: italic;
+  color: #fff;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  margin-right: 5px;
+  border-radius: 50%;
+  background-color: #fff;
+  animation: pulse 1s ease-in-out infinite;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* Animasi untuk titik-titik */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.5); }
+  100% { transform: scale(1); }
+}
+
+    .popup-container {
+    position: relative;
+}
+
+.popup-menu {
+    position: absolute;
+    top: 40px;
+    right: 10px;
+    width: 150px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    display: none;
+}
+
+.popup-menu a {
+    display: block;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+}
+
+.popup-menu a:hover {
+    background-color: #eee;
+}
+
+.popup-menu:after {
+    content: "";
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    border-style: solid;
+    border-width: 0 10px 10px 10px;
+    border-color: transparent transparent #fff transparent;
+}
+
+.popup-container:hover .popup-menu {
+    display: block;
+}
+    .chatbot-header {
+    position: relative;
+}
+
+.chatbot-header .menu-icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.chatbot-header .menu-icon span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin-bottom: 5px;
+    background-color: #fff;
+    border-radius: 3px;
+}
+
+.chatbot-header .menu-icon span:last-child {
+    margin-bottom: 0;
+}
+
+.chatbot-header .menu-icon:hover span {
+    background-color: #eee;
+}
+  
